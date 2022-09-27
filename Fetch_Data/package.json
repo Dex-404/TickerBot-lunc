@@ -1,0 +1,27 @@
+{
+  "name": "lunc_data_fetch",
+  "version": "1.2.0",
+  "description": "The Data fetcher for lunc-ticker-bot",
+  "main": "fetch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dex-404/TickerBot-lunc.git"
+  },
+  "keywords": [
+    "lunc-ticker",
+    "Terra-Rebels"
+  ],
+  "author": "Dex-404",
+  "license": "BSD 3-Clause",
+  "bugs": {
+    "url": "https://github.com/Dex-404/TickerBot-lunc/issues"
+  },
+  "homepage": "https://github.com/Dex-404/TickerBot-lunc#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "ccxt": "^1.93.101"
+  }
+}

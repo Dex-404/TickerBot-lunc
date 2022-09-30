@@ -13,7 +13,7 @@ const tick = async () => {
             axios.get('https://api-dev.terrarity.io/analytics/price/latest?coin=lunc'),
             axios.get('https://columbus-lcd.terra.dev/terra/treasury/v1beta1/tax_proceeds'),
             axios.get('https://api-dev.terrarity.io/wallets/lunc_burner_graph?range=7d&denom=uluna'),
-            axios.get('https://api-dev.terrarity.io/wallets/tax_burner_graph?range=7d&denom=uluna'),
+            axios.get('https://api-dev.terrarity.io/wallets/tax_burner_graph?range=all&denom=uluna'),
             axios.get('https://api-dev.terrarity.io/wallets/lunc_burner_graph?range=7d&denom=uusd'),
             axios.get('https://api-dev.terrarity.io/wallets/tax_burner_graph?range=7d&denom=uusd')
         ]);
@@ -33,10 +33,17 @@ const tick = async () => {
         parts_burned_ust[0] = parts_burned_ust[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         const fVal_burned_ust = parts_burned_ust[0]
 
-        var val_tax = parseInt(results[3].data.tax_proceeds[13].amount) / 1000000;
-        var parts_tax = val_tax.toString().split(".");
-        parts_tax[0] = parts_tax[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        const fVal_tax = parts_tax[0]
+        // var val_tax = parseInt(results[3].data.tax_proceeds[13].amount) / 1000000;
+        // var parts_tax = val_tax.toString().split(".");
+        // parts_tax[0] = parts_tax[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        // const fVal_tax = parts_tax[0]
+
+        const array_tax = results[5].data
+        let last_tax = array_tax.slice(-1)[0];
+        const val_Burnt_Tax = last_tax.total_burned / 1000000;
+        var parts_tax = val_Burnt_Tax.toString().split(".");
+        var parts_tax = parts_tax[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        const fVal_tax = parts_tax
 
         const value_supply = results[2].data.supply;
         var parts_supply = value_supply.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -81,7 +88,7 @@ const tick = async () => {
         const val_ust_td = ust_td.toString().split(".");
         const fVal_ust_td = val_ust_td[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-        const totalBurn = value_burned + val_tax;
+        const totalBurn = value_burned + val_Burnt_Tax;
         var parts_total = totalBurn.toString().split('.');
         parts_total[0] = parts_total[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         const fVal_tot_burnt = parts_total[0]
